@@ -38,20 +38,23 @@ class Movies extends React.Component {
     render() {
         const { films, filmDetails } = this.state
 
-        let dropDownOptions = films.map((film, i) => {
-            return <option value={i}>{film.title}</option>
+        let dropDownOptions = films.map((film) => {
+            return <option>{film.title}</option>
         });
 
         let infToDisplay = this.state.films.find((film) => {
-            return films.title === this.state.filmDetails
+            return this.state.films.title === this.state.filmDetails
             
         })
-        // <div className="movie">
+
+        
+        // <section>
         //     <p>Title: {film.title}</p>
         //     <p>Release Date: {films.release_date}</p>
         //     <p>Description: {films.description}</p>
-        // </div>
-        console.log(films)
+        // </section>
+        
+
         return (
             <div className=".movies">
                 <h1>Select a Movie</h1>
@@ -59,7 +62,11 @@ class Movies extends React.Component {
                     <option></option>
                     {dropDownOptions}
                 </select>
-                {/* <div>{this.state.filmDetails ? {infToDisplay} : null}</div>  */}
+                <span>{infToDisplay ? 
+                `Title: {this.state.films.title}
+                Release Date: {films.release_date}
+                Description: {films.description}`
+                : null}</span> 
         
             </div>
         )

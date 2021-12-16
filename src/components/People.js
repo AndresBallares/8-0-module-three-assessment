@@ -36,13 +36,13 @@ class People extends React.Component {
         })
     }
 
-   
+
 
     render() {
         const { people, userInput } = this.state
 
-        let diplayInf = people.find((person) => {
-            return people.name === userInput
+        let displayInf = this.state.people.find((person) => {
+            return this.state.people.name === this.state.userInput
         })
 
         return (
