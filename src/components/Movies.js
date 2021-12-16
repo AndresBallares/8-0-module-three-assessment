@@ -6,6 +6,7 @@ class Movies extends React.Component {
 
         this.state = ({
             films: [],
+            filmDetails: null
         })
     }
 
@@ -16,6 +17,7 @@ class Movies extends React.Component {
             console.log(movieData)
             this.setState({
                 films: movieData,
+                
             }) 
         });
     }
@@ -24,24 +26,41 @@ class Movies extends React.Component {
         this.moviesFetch()
     }
 
-    
+    handleOnChange = (event) => {
+        this.setState({
+            filmDetails: event.target.value,    
+        })
+    }
+
+
 
 
     render() {
-        const { films } = this.state
+        const { films, filmDetails } = this.state
 
-        let dropDownOptions = films.map((film) => {
-            return <option>{film.title}</option>
+        let dropDownOptions = films.map((film, i) => {
+            return <option value={i}>{film.title}</option>
         });
-        
+
+        let infToDisplay = this.state.films.find((film) => {
+            return films.title === this.state.filmDetails
+            
+        })
+        // <div className="movie">
+        //     <p>Title: {film.title}</p>
+        //     <p>Release Date: {films.release_date}</p>
+        //     <p>Description: {films.description}</p>
+        // </div>
+        console.log(films)
         return (
             <div className=".movies">
                 <h1>Select a Movie</h1>
-                <select>
+                <select onChange={this.handleOnChange}>
                     <option></option>
                     {dropDownOptions}
                 </select>
-
+                {/* <div>{this.state.filmDetails ? {infToDisplay} : null}</div>  */}
+        
             </div>
         )
     }
