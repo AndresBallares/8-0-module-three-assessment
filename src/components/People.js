@@ -8,42 +8,48 @@ class People extends React.Component {
         this.state = ({
             people: [],
             userInput: "",
+            
 
-        })
-    }
-
-    handleSearch = () => {
-        fetch("https://ghibliapi.herokuapp.com/people")
-        .then((response) => response.json())
-        .then((data) => {
-
-            console.log(data)
-            this.setState({ people: data })
         })
     }
 
     componentDidMount = () => {
-        this.handleSearch()
-    }
+        fetch("https://ghibliapi.herokuapp.com/people")
+        .then((response) => response.json())
+        .then((data) => {
 
+            this.setState({ people: data })
+        })
+    }
+    
+    
+    
     handleSubmit = (event) => {
         event.preventDefault();
-    }
+        const {userInput, people, person} = this.state
 
+        this.setState({userInput: ""})
+
+    }
+    
     handleUserInput = (event) => {
+        const { person, userInput } = this.state
         this.setState({
             userInput: event.target.value,
         })
+ 
+        
     }
-
-
-
+    
+    
     render() {
-        const { people, userInput } = this.state
-
+        const { people, userInput, person } = this.state
         let displayInf = this.state.people.find((person) => {
-            return this.state.people.name === this.state.userInput
+            return person.name === this.state.userInput
         })
+        console.log(this.state.person)
+
+    
 
         return (
             <div className=".people">
@@ -54,8 +60,15 @@ class People extends React.Component {
                     placeholder="Find Your Person"
                     value={userInput}
                     onChange={this.handleUserInput}
+                    name="person"
                     />
-                    <button onClick={this.handleSearch} type="submit">Submit</button>
+                    <button onClick={this.componentDidMount} type="submit">Submit</button> 
+                    {displayInf ? (
+                    <div>
+                        <h3>{displayInf.name}</h3>
+                        <p>{displayInf.age}</p>
+                        <p>{displayInf.gender}</p>
+                    </div>): <p>Not Found</p>}
                 </form>
 
             </div>

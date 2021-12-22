@@ -16,6 +16,8 @@ class NavBar extends React.Component {
                     <img src="https://i.insider.com/5484d9d1eab8ea3017b17e29?width=700&format=jpeg&auto=webp"
                 alt="dog"
                 className="dog-logo"
+                width="50px"
+                height="50px"
                 />
                 </Link>
                 <Link to="/movies">Movies</Link> 
